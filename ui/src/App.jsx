@@ -4,6 +4,7 @@ import { Leva } from "leva";
 import { Scenario } from "./components/Scenario";
 import { ChatInterface } from "./components/ChatInterface";
 import { useState } from "react";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState("Default");
@@ -11,6 +12,7 @@ function App() {
     <>
       <Loader />
       <Leva collapsed hidden />
+      <LandingPage />
       <ChatInterface
         personality={selectedOption}
         changePersonality={setSelectedOption}

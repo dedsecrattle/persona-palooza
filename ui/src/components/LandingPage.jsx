@@ -1,42 +1,9 @@
-import Link from "next/link";
+import { Link } from "@mui/material";
 import { ArrowRight, MessageCircle, Users } from "lucide-react";
 
-export default function LandingPage() {
+const LandingPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="py-6 px-4 sm:px-6 lg:px-8">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-primary">Persona Palooza</h1>
-          <nav>
-            <ul className="flex space-x-4">
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
 
       <main className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-indigo-900">
         <div className="max-w-3xl mx-auto text-center">
@@ -69,20 +36,8 @@ export default function LandingPage() {
           </div>
         </div>
       </main>
-
-      <footer className="py-6 px-4 sm:px-6 lg:px-8 bg-muted">
-        <div className="container mx-auto flex justify-between items-center">
-          <p className="text-sm text-muted-foreground">
-            &copy; 2025 Persona Palooza. All rights reserved.
-          </p>
-          <div className="flex items-center space-x-2">
-            <Users className="h-5 w-5 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground">
-              Join our community
-            </span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
-}
+};
+
+export default LandingPage;
