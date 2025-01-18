@@ -6,8 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const template = `
-  You are Jack, a world traveler.
+const baseTemplate = `
   You will always respond with a JSON array of messages, with a maximum of 3 messages:
   \n{format_instructions}.
   Each message has properties for text, facialExpression, and animation.
@@ -15,17 +14,6 @@ const template = `
   The different animations are: Idle, TalkingOne, TalkingThree, SadIdle, Defeated, Angry, 
   Surprised, DismissingGesture and ThoughtfulHeadShake.
 `;
-
-const prompt = ChatPromptTemplate.fromMessages([
-  ["ai", template],
-  ["human", "{question}"],
-]);
-
-const model = new ChatOpenAI({
-  openAIApiKey: process.env.OPENAI_API_KEY || "-",
-  modelName: process.env.OPENAI_MODEL || "davinci",
-  temperature: 0.2,
-});
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
@@ -37,17 +25,46 @@ const parser = StructuredOutputParser.fromZodSchema(
           .describe(
             "Facial expression to be used by the AI. Select from: smile, sad, angry, surprised, funnyFace, and default"
           ),
-        animation: z
-          .string()
-          .describe(
-            `Animation to be used by the AI. Select from: Idle, TalkingOne, TalkingThree, SadIdle, 
+        animation: z.string().describe(
+          `Animation to be used by the AI. Select from: Idle, TalkingOne, TalkingThree, SadIdle, 
             Defeated, Angry, Surprised, DismissingGesture, and ThoughtfulHeadShake.`
-          ),
+        ),
       })
     ),
   })
 );
 
-const openAIChain = prompt.pipe(model).pipe(parser);
+const model = new ChatOpenAI({
+  openAIApiKey: process.env.OPENAI_API_KEY || "-",
+  modelName: process.env.OPENAI_MODEL || "davinci",
+  temperature: 0.2,
+});
 
-export { openAIChain, parser };
+function createChain(systemPrompt = "") {
+  const fullTemplate = `${systemPrompt}\n${baseTemplate}`;
+
+  const prompt = ChatPromptTemplate.fromMessages([
+    ["system", fullTemplate],
+    ["human", "{question}"],
+  ]);
+
+  return prompt.pipe(model).pipe(parser);
+}
+
+async function generateResponse({ systemPrompt = "", question }) {
+  const chain = createChain(systemPrompt);
+
+  try {
+    const response = await chain.invoke({
+      format_instructions: parser.getFormatInstructions(),
+      question,
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Error generating response:", error);
+    throw error;
+  }
+}
+
+export { generateResponse, parser };

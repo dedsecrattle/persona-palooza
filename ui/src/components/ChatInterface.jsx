@@ -2,39 +2,49 @@ import { useRef, useState } from "react";
 import { useSpeech } from "../hooks/useSpeech";
 import { Button, Menu, MenuItem } from "@mui/material";
 
-export const ChatInterface = ({ hidden, ...props }) => {
+const options = [
+  "Default",
+  "Sumanth",
+  "Prabhat",
+  "Anvita",
+  "Tresa",
+  "Zen_Master",
+  "Corporate_Robot",
+  "Lazy_Teenager",
+  "Hot_Shakespeare",
+  "Overhyped_Bro",
+  "Goth_Girl",
+];
+
+export const ChatInterface = ({ hidden, personality, changePersonality }) => {
   const input = useRef();
   const { tts, loading, message, startRecording, stopRecording, recording } =
     useSpeech();
 
-  // State for the dropdown menu
-  const [anchorEl, setAnchorEl] = useState(null); // To control menu visibility
-  const [selectedOption, setSelectedOption] = useState("Select Personality");
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const [buttonClicked, setButtonClicked] = useState(false);
 
   const sendMessage = () => {
     const text = input.current.value;
     if (!loading && !message) {
-      tts(text);
+      tts(text, personality);
       input.current.value = "";
     }
   };
 
-  // Handle opening of dropdown menu
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     setButtonClicked(true);
   };
 
-  // Handle closing of dropdown menu
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  // Handle option selection in the dropdown
   const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-    handleClose(); // Close the menu after selection
+    changePersonality(option);
+    handleClose();
   };
 
   if (hidden) {
@@ -56,27 +66,21 @@ export const ChatInterface = ({ hidden, ...props }) => {
             className="mt-4 p-4 text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg shadow-purple-400 rounded-lg"
             variant="contained"
             color="primary"
-            style={{ zIndex: 60 }} // Higher z-index to ensure it's on top
+            style={{ zIndex: 60 }}
           >
-            {selectedOption} {/* Display the selected option */}
+            {personality}
           </Button>
-
-          {/* Menu Component */}
           <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleClose}
-            style={{ zIndex: 60 }} // Higher z-index for dropdown menu
+            style={{ zIndex: 60 }}
           >
-            <MenuItem onClick={() => handleOptionSelect("Personality 1")}>
-              Corporate Robot
-            </MenuItem>
-            <MenuItem onClick={() => handleOptionSelect("Personality 2")}>
-              Thanos
-            </MenuItem>
-            <MenuItem onClick={() => handleOptionSelect("Personality 3")}>
-              Sumanth
-            </MenuItem>
+            {options.map((text) => (
+              <MenuItem onClick={() => handleOptionSelect(text)}>
+                {text.replace("_", " ")}
+              </MenuItem>
+            ))}
           </Menu>
           <Button
             disabled={loading || message}
