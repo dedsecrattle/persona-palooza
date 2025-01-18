@@ -82,7 +82,7 @@ export const SpeechProvider = ({ children }) => {
     }
   };
 
-  const tts = async (message) => {
+  const tts = async (message, personality) => {
     setLoading(true);
     try {
       const data = await fetch(`${backendUrl}/tts`, {
@@ -90,7 +90,7 @@ export const SpeechProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ message, personality }),
       });
       const response = (await data.json()).messages;
       setMessages((messages) => [...messages, ...response]);

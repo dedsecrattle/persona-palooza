@@ -1,10 +1,14 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import { openAIChain, parser } from "./modules/openAI.mjs";
+import { generateResponse } from "./modules/openAI.mjs";
 import { lipSync } from "./modules/lip-sync.mjs";
-import { sendDefaultMessages, defaultResponse } from "./modules/defaultMessages.mjs";
+import {
+  sendDefaultMessages,
+  defaultResponse,
+} from "./modules/defaultMessages.mjs";
 import { convertAudioToText } from "./modules/whisper.mjs";
+import { mapping } from "./constants/promptsMapping.js";
 
 dotenv.config();
 
@@ -21,6 +25,9 @@ app.get("/voices", async (req, res) => {
 
 app.post("/tts", async (req, res) => {
   const userMessage = await req.body.message;
+  const personality = await req.body.personality;
+  console.log(personality);
+  console.log(mapping[personality]);
   const defaultMessages = await sendDefaultMessages({ userMessage });
   if (defaultMessages) {
     res.send({ messages: defaultMessages });
@@ -28,13 +35,14 @@ app.post("/tts", async (req, res) => {
   }
   let openAImessages;
   try {
-    openAImessages = await openAIChain.invoke({
+    openAImessages = await generateResponse({
       question: userMessage,
-      format_instructions: parser.getFormatInstructions(),
+      systemPrompt: mapping[personality],
     });
   } catch (error) {
     openAImessages = defaultResponse;
   }
+
   openAImessages = await lipSync({ messages: openAImessages.messages });
   res.send({ messages: openAImessages });
 });
@@ -45,9 +53,9 @@ app.post("/sts", async (req, res) => {
   const userMessage = await convertAudioToText({ audioData });
   let openAImessages;
   try {
-    openAImessages = await openAIChain.invoke({
+    openAImessages = await generateResponse({
       question: userMessage,
-      format_instructions: parser.getFormatInstructions(),
+      systemPrompt: mapping[personality],
     });
   } catch (error) {
     openAImessages = defaultResponse;
