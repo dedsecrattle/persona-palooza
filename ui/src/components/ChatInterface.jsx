@@ -54,7 +54,7 @@ export const ChatInterface = ({ hidden, personality, changePersonality }) => {
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-between p-4 flex-col pointer-events-none">
       <div className="self-start backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg pointer-events-auto">
-        <h1 className="font-black text-xl text-gray-700">Persona Palooza</h1>
+        <h1 className="font-black text-2xl text-gray-700">Persona Palooza</h1>
         <p className="text-gray-600">
           {loading
             ? "Loading..."
@@ -97,7 +97,7 @@ export const ChatInterface = ({ hidden, personality, changePersonality }) => {
       <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
         <button
           onClick={recording ? stopRecording : startRecording}
-          className={`bg-gray-500 hover:bg-gray-800 text-white p-4 px-4 font-semibold uppercase rounded-md ${
+          className={`bg-[#d5163f] hover:bg-[#8b0c27] text-white p-4 px-4 font-semibold uppercase rounded-md ${
             recording ? "bg-red-500 hover:bg-red-600" : ""
           } ${loading || message ? "cursor-not-allowed opacity-30" : ""}`}
         >
@@ -132,7 +132,7 @@ export const ChatInterface = ({ hidden, personality, changePersonality }) => {
         <button
           disabled={loading || message}
           onClick={sendMessage}
-          className={`bg-gray-500 hover:bg-gray-800 text-white p-4 px-10 font-semibold uppercase rounded-md ${
+          className={`bg-[#d5163f] hover:bg-[#8b0c27] text-white p-4 px-10 font-semibold uppercase rounded-md ${
             loading || message ? "cursor-not-allowed opacity-30" : ""
           }`}
         >

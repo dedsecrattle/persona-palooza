@@ -8,18 +8,26 @@ import LandingPage from "./components/LandingPage";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState("Default");
+  const [showChat, setShowChat] = useState(false); // Manage the state for showing ChatInterface
+
   return (
     <>
       <Loader />
       <Leva collapsed hidden />
-      <LandingPage />
-      <ChatInterface
-        personality={selectedOption}
-        changePersonality={setSelectedOption}
-      />
-      <Canvas shadows camera={{ position: [0, 0, 0], fov: 10 }}>
-        <Scenario personality={selectedOption} />
-      </Canvas>
+      {showChat ? (
+        <>
+          {/* ChatInterface and 3D Canvas */}
+          <ChatInterface
+            personality={selectedOption}
+            changePersonality={setSelectedOption}
+          />
+          <Canvas shadows camera={{ position: [0, 0, 0], fov: 10 }}>
+            <Scenario personality={selectedOption} />
+          </Canvas>
+        </>
+      ) : (
+        <LandingPage setShowChat={setShowChat} />
+      )}
     </>
   );
 }
