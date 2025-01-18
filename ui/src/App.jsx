@@ -6,7 +6,6 @@ import { Scenario } from "./components/Scenario";
 function App() {
   return (
     <>
-      <h1>Hello World</h1>
       <Loader />
       <Leva collapsed />
       <Canvas shadows camera={{ position: [0, 0, 0], fov: 10 }}>
