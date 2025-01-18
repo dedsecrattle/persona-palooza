@@ -41,13 +41,50 @@ export const ChatInterface = ({ hidden, ...props }) => {
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-between p-4 flex-col pointer-events-none">
-      <div className="self-start backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg z-50">
+      {/* <div className="self-start backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg z-50"> */}
+      <div className="self-start backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg pointer-events-auto">
+      
         <h1 className="font-black text-xl text-gray-700">Persona Palooza</h1>
         <p className="text-gray-600">
           {loading
             ? "Loading..."
             : "Type a message and press enter to chat with the AI."}
         </p>
+        <Button
+          disabled={loading || message}
+          onClick={sendMessage}
+          className={`bg-gray-500 hover:bg-gray-600 text-white p-4 px-10 font-semibold uppercase rounded-md ${
+            loading || message ? "cursor-not-allowed opacity-30" : ""
+          }`}
+        >
+        </Button>
+        <Button
+          onClick={handleClick}
+          className="self-start mb-4"
+          variant="contained"
+          color="primary"
+          style={{ zIndex: 60 }} // Higher z-index to ensure it's on top
+        >
+          {selectedOption} {/* Display the selected option */}
+        </Button>
+
+        {/* Menu Component */}
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          style={{ zIndex: 60 }} // Higher z-index for dropdown menu
+        >
+          <MenuItem onClick={() => handleOptionSelect("Personality 1")}>
+            Corporate Robot
+          </MenuItem>
+          <MenuItem onClick={() => handleOptionSelect("Personality 2")}>
+            Thanos
+          </MenuItem>
+          <MenuItem onClick={() => handleOptionSelect("Personality 3")}>
+            Personality 3
+          </MenuItem>
+        </Menu>
       </div>
 
       <div className="w-full flex flex-col items-end justify-center gap-4"></div>
@@ -96,33 +133,6 @@ export const ChatInterface = ({ hidden, ...props }) => {
         >
           Send
         </button>
-        <button
-          onClick={handleClick}
-          className="self-start mb-4"
-          variant="contained"
-          color="primary"
-          style={{ zIndex: 60 }} // Higher z-index to ensure it's on top
-        >
-          {selectedOption} {/* Display the selected option */}
-        </button>
-
-        {/* Menu Component */}
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-          style={{ zIndex: 60 }} // Higher z-index for dropdown menu
-        >
-          <MenuItem onClick={() => handleOptionSelect("Personality 1")}>
-            Personality 1
-          </MenuItem>
-          <MenuItem onClick={() => handleOptionSelect("Personality 2")}>
-            Personality 2
-          </MenuItem>
-          <MenuItem onClick={() => handleOptionSelect("Personality 3")}>
-            Personality 3
-          </MenuItem>
-        </Menu>
       </div>
     </div>
   );
