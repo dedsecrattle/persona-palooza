@@ -7,14 +7,18 @@ const RETRY_DELAY = 0;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const lipSync = async ({ messages }) => {
+const lipSync = async ({ messages, personality }) => {
   await Promise.all(
     messages.map(async (message, index) => {
       const fileName = `audios/message_${index}.mp3`;
 
       for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
         try {
-          await convertTextToSpeech({ text: message.text, fileName });
+          await convertTextToSpeech({
+            text: message.text,
+            fileName,
+            personality,
+          });
           await delay(RETRY_DELAY);
           break;
         } catch (error) {
