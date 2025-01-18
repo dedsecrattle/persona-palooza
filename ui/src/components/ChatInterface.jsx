@@ -1,10 +1,15 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSpeech } from "../hooks/useSpeech";
+import { Button, Menu, MenuItem } from "@mui/material";
 
 export const ChatInterface = ({ hidden, ...props }) => {
   const input = useRef();
   const { tts, loading, message, startRecording, stopRecording, recording } =
     useSpeech();
+
+  // State for the dropdown menu
+  const [anchorEl, setAnchorEl] = useState(null);  // To control menu visibility
+  const [selectedOption, setSelectedOption] = useState("Select Personality");
 
   const sendMessage = () => {
     const text = input.current.value;
@@ -13,13 +18,30 @@ export const ChatInterface = ({ hidden, ...props }) => {
       input.current.value = "";
     }
   };
+
+  // Handle opening of dropdown menu
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  // Handle closing of dropdown menu
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  // Handle option selection in the dropdown
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+    handleClose(); // Close the menu after selection
+  };
+
   if (hidden) {
     return null;
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
-      <div className="self-start backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg">
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-between p-4 flex-col pointer-events-none">
+      <div className="self-start backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg z-50">
         <h1 className="font-black text-xl text-gray-700">Persona Palooza</h1>
         <p className="text-gray-600">
           {loading
@@ -27,7 +49,9 @@ export const ChatInterface = ({ hidden, ...props }) => {
             : "Type a message and press enter to chat with the AI."}
         </p>
       </div>
+
       <div className="w-full flex flex-col items-end justify-center gap-4"></div>
+
       <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
         <button
           onClick={recording ? stopRecording : startRecording}
@@ -51,8 +75,9 @@ export const ChatInterface = ({ hidden, ...props }) => {
           </svg>
         </button>
 
+        {/* Input field with higher z-index */}
         <input
-          className="w-full placeholder:text-gray-800 placeholder:italic p-4 rounded-md bg-opacity-50 bg-white backdrop-blur-md"
+          className="w-full placeholder:text-gray-800 placeholder:italic p-4 rounded-md bg-opacity-50 bg-white backdrop-blur-md z-60"
           placeholder="Type a message..."
           ref={input}
           onKeyDown={(e) => {
@@ -61,6 +86,7 @@ export const ChatInterface = ({ hidden, ...props }) => {
             }
           }}
         />
+
         <button
           disabled={loading || message}
           onClick={sendMessage}
@@ -70,6 +96,33 @@ export const ChatInterface = ({ hidden, ...props }) => {
         >
           Send
         </button>
+        <button
+          onClick={handleClick}
+          className="self-start mb-4"
+          variant="contained"
+          color="primary"
+          style={{ zIndex: 60 }} // Higher z-index to ensure it's on top
+        >
+          {selectedOption} {/* Display the selected option */}
+        </button>
+
+        {/* Menu Component */}
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          style={{ zIndex: 60 }} // Higher z-index for dropdown menu
+        >
+          <MenuItem onClick={() => handleOptionSelect("Personality 1")}>
+            Personality 1
+          </MenuItem>
+          <MenuItem onClick={() => handleOptionSelect("Personality 2")}>
+            Personality 2
+          </MenuItem>
+          <MenuItem onClick={() => handleOptionSelect("Personality 3")}>
+            Personality 3
+          </MenuItem>
+        </Menu>
       </div>
     </div>
   );

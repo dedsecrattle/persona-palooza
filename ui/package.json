@@ -4,13 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --force",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@langchain/openai": "^0.3.17",
+    "@mui/material": "^6.4.0",
     "@react-three/drei": "^9.121.2",
     "@react-three/fiber": "^8.17.12",
     "@types/three": "^0.172.0",
