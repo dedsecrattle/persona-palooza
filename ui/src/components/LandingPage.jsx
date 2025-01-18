@@ -6,6 +6,9 @@ const LandingPage = ({ setShowChat }) => {
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg shadow-purple-400 rounded-lg">
         <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-6xl font-extrabold text-white mb-14">
+            🤖 PERSONA PALOOZA!
+          </h1>
           <h2 className="text-4xl font-extrabold text-white text-primary sm:text-5xl md:text-6x">
             Meet Your Digital Companions
           </h2>

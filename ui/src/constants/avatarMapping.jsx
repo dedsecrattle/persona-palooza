@@ -5,11 +5,13 @@ import { GothGirl } from "../avatars/GothGirl";
 import { HotShakespeare } from "../avatars/HotShakespeare";
 import { LazyTeenager } from "../avatars/LazyTeenager";
 import { OverhypedBro } from "../avatars/OverhypedBro";
+import { Prabhat } from "../avatars/Prabhat";
 import { Sumanth } from "../avatars/Sumanth";
 import { Tresa } from "../avatars/Tresa";
 import { ZenMaster } from "../avatars/ZenMaster";
 const mapping = {
   Default: <Default />,
+  Prabhat: <Prabhat />,
   Sumanth: <Sumanth />,
   Zen_Master: <ZenMaster />,
   Corporate_Robot: <CorportateRobot />,
