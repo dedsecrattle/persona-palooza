@@ -43,7 +43,6 @@ app.post("/tts", async (req, res) => {
     openAImessages = defaultResponse;
   }
 
-
   openAImessages = await lipSync({ messages: openAImessages.messages });
   res.send({ messages: openAImessages });
 });
