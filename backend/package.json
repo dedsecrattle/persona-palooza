@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@11labs/client": "^0.0.4",
+    "dotenv": "^16.4.7"
+  }
+}
