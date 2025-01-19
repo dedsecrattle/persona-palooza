@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "soundFile": "/Users/prabhat/Documents/persona-palooza/backend/audios/message_Default_0.wav",
+    "duration": 1.61
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.12, "value": "B" },
+    { "start": 0.12, "end": 0.24, "value": "A" },
+    { "start": 0.24, "end": 0.29, "value": "B" },
+    { "start": 0.29, "end": 0.36, "value": "A" },
+    { "start": 0.36, "end": 0.42, "value": "C" },
+    { "start": 0.42, "end": 0.50, "value": "A" },
+    { "start": 0.50, "end": 0.72, "value": "B" },
+    { "start": 0.72, "end": 1.00, "value": "C" },
+    { "start": 1.00, "end": 1.28, "value": "B" },
+    { "start": 1.28, "end": 1.61, "value": "X" }
+  ]
+}

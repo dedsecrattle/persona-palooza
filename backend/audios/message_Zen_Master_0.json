@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "soundFile": "/Users/prabhat/Documents/persona-palooza/backend/audios/message_Zen_Master_0.wav",
+    "duration": 4.44
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.01, "value": "X" },
+    { "start": 0.01, "end": 0.06, "value": "B" },
+    { "start": 0.06, "end": 0.11, "value": "H" },
+    { "start": 0.11, "end": 0.25, "value": "C" },
+    { "start": 0.25, "end": 0.32, "value": "B" },
+    { "start": 0.32, "end": 0.39, "value": "G" },
+    { "start": 0.39, "end": 0.53, "value": "B" },
+    { "start": 0.53, "end": 0.67, "value": "H" },
+    { "start": 0.67, "end": 0.74, "value": "C" },
+    { "start": 0.74, "end": 0.81, "value": "B" },
+    { "start": 0.81, "end": 0.95, "value": "G" },
+    { "start": 0.95, "end": 1.09, "value": "E" },
+    { "start": 1.09, "end": 1.16, "value": "F" },
+    { "start": 1.16, "end": 1.51, "value": "B" },
+    { "start": 1.51, "end": 1.58, "value": "G" },
+    { "start": 1.58, "end": 1.72, "value": "E" },
+    { "start": 1.72, "end": 1.79, "value": "C" },
+    { "start": 1.79, "end": 1.87, "value": "A" },
+    { "start": 1.87, "end": 2.09, "value": "D" },
+    { "start": 2.09, "end": 2.15, "value": "C" },
+    { "start": 2.15, "end": 2.75, "value": "B" },
+    { "start": 2.75, "end": 2.89, "value": "C" },
+    { "start": 2.89, "end": 3.17, "value": "B" },
+    { "start": 3.17, "end": 3.45, "value": "C" },
+    { "start": 3.45, "end": 3.59, "value": "B" },
+    { "start": 3.59, "end": 3.73, "value": "G" },
+    { "start": 3.73, "end": 3.94, "value": "E" },
+    { "start": 3.94, "end": 4.01, "value": "G" },
+    { "start": 4.01, "end": 4.22, "value": "B" },
+    { "start": 4.22, "end": 4.44, "value": "X" }
+  ]
+}

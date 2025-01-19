@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "soundFile": "/Users/prabhat/Documents/persona-palooza/backend/audios/message_Hot_Shakespeare_0.wav",
+    "duration": 4.31
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.09, "value": "X" },
+    { "start": 0.09, "end": 0.16, "value": "B" },
+    { "start": 0.16, "end": 0.24, "value": "A" },
+    { "start": 0.24, "end": 0.29, "value": "F" },
+    { "start": 0.29, "end": 0.48, "value": "B" },
+    { "start": 0.48, "end": 0.69, "value": "E" },
+    { "start": 0.69, "end": 0.83, "value": "C" },
+    { "start": 0.83, "end": 0.92, "value": "A" },
+    { "start": 0.92, "end": 1.21, "value": "B" },
+    { "start": 1.21, "end": 1.35, "value": "H" },
+    { "start": 1.35, "end": 1.42, "value": "C" },
+    { "start": 1.42, "end": 1.49, "value": "B" },
+    { "start": 1.49, "end": 1.56, "value": "G" },
+    { "start": 1.56, "end": 1.64, "value": "A" },
+    { "start": 1.64, "end": 1.89, "value": "B" },
+    { "start": 1.89, "end": 2.03, "value": "G" },
+    { "start": 2.03, "end": 2.17, "value": "C" },
+    { "start": 2.17, "end": 2.31, "value": "B" },
+    { "start": 2.31, "end": 2.53, "value": "X" },
+    { "start": 2.53, "end": 2.68, "value": "B" },
+    { "start": 2.68, "end": 2.82, "value": "C" },
+    { "start": 2.82, "end": 2.93, "value": "A" },
+    { "start": 2.93, "end": 3.08, "value": "D" },
+    { "start": 3.08, "end": 3.15, "value": "H" },
+    { "start": 3.15, "end": 3.22, "value": "G" },
+    { "start": 3.22, "end": 3.29, "value": "C" },
+    { "start": 3.29, "end": 3.37, "value": "A" },
+    { "start": 3.37, "end": 3.54, "value": "B" },
+    { "start": 3.54, "end": 3.61, "value": "H" },
+    { "start": 3.61, "end": 3.75, "value": "C" },
+    { "start": 3.75, "end": 3.82, "value": "E" },
+    { "start": 3.82, "end": 4.03, "value": "B" },
+    { "start": 4.03, "end": 4.31, "value": "X" }
+  ]
+}
