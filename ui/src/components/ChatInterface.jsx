@@ -16,10 +16,18 @@ const options = [
   "Goth_Girl",
 ];
 
-export const ChatInterface = ({ hidden, personality, changePersonality }) => {
+export const ChatInterface = ({ hidden }) => {
   const input = useRef();
-  const { tts, loading, message, startRecording, stopRecording, recording } =
-    useSpeech();
+  const {
+    tts,
+    loading,
+    message,
+    startRecording,
+    stopRecording,
+    recording,
+    personality,
+    setPersonality,
+  } = useSpeech();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -43,7 +51,7 @@ export const ChatInterface = ({ hidden, personality, changePersonality }) => {
   };
 
   const handleOptionSelect = (option) => {
-    changePersonality(option);
+    setPersonality(option);
     handleClose();
   };
 
@@ -77,7 +85,7 @@ export const ChatInterface = ({ hidden, personality, changePersonality }) => {
             style={{ zIndex: 60 }}
           >
             {options.map((text) => (
-              <MenuItem onClick={() => handleOptionSelect(text)}>
+              <MenuItem key={text} onClick={() => handleOptionSelect(text)}>
                 {text.replace("_", " ")}
               </MenuItem>
             ))}
