@@ -46,7 +46,7 @@ const LandingPage = ({ setShowChat }) => {
               />
             </Button>
             <Link
-              href="#"
+              href="https://github.com/dedsecrattle/persona-palooza"
               className="inline-flex items-center px-6 py-3 border border-transparent 
     text-base font-medium rounded-md 
     !text-white
