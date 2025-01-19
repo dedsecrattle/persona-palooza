@@ -7,8 +7,7 @@ import { useState } from "react";
 import LandingPage from "./components/LandingPage";
 
 function App() {
-  const [selectedOption, setSelectedOption] = useState("Default");
-  const [showChat, setShowChat] = useState(false); // Manage the state for showing ChatInterface
+  const [showChat, setShowChat] = useState(false);
 
   return (
     <>
@@ -17,12 +16,9 @@ function App() {
       {showChat ? (
         <>
           {/* ChatInterface and 3D Canvas */}
-          <ChatInterface
-            personality={selectedOption}
-            changePersonality={setSelectedOption}
-          />
+          <ChatInterface />
           <Canvas shadows camera={{ position: [0, 0, 0], fov: 10 }}>
-            <Scenario personality={selectedOption} />
+            <Scenario />
           </Canvas>
         </>
       ) : (

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 
 const backendUrl = "http://localhost:3000";
 
@@ -10,6 +10,12 @@ export const SpeechProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
+  const [personality, setPersonality] = useState("Default");
+  const personalityRef = useRef(personality);
+
+  useEffect(() => {
+    personalityRef.current = personality;
+  }, [personality]);
 
   let chunks = [];
 
@@ -33,7 +39,10 @@ export const SpeechProvider = ({ children }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ audio: base64Audio }),
+          body: JSON.stringify({
+            audio: base64Audio,
+            personality: personalityRef.current,
+          }),
         });
         const response = (await data.json()).messages;
         setMessages((messages) => [...messages, ...response]);
@@ -82,7 +91,7 @@ export const SpeechProvider = ({ children }) => {
     }
   };
 
-  const tts = async (message, personality) => {
+  const tts = async (message) => {
     setLoading(true);
     try {
       const data = await fetch(`${backendUrl}/tts`, {
@@ -90,7 +99,7 @@ export const SpeechProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message, personality }),
+        body: JSON.stringify({ message, personality: personality }),
       });
       const response = (await data.json()).messages;
       setMessages((messages) => [...messages, ...response]);
@@ -123,6 +132,8 @@ export const SpeechProvider = ({ children }) => {
         message,
         onMessagePlayed,
         loading,
+        personality,
+        setPersonality,
       }}
     >
       {children}

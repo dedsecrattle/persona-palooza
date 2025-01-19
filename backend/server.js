@@ -43,12 +43,17 @@ app.post("/tts", async (req, res) => {
     openAImessages = defaultResponse;
   }
 
-  openAImessages = await lipSync({ messages: openAImessages.messages, personality: personality });
+  openAImessages = await lipSync({
+    messages: openAImessages.messages,
+    personality: personality,
+  });
   res.send({ messages: openAImessages });
 });
 
 app.post("/sts", async (req, res) => {
   const base64Audio = req.body.audio;
+  const personality = await req.body.personality;
+  console.log("Audio requested for", personality);
   const audioData = Buffer.from(base64Audio, "base64");
   const userMessage = await convertAudioToText({ audioData });
   let openAImessages;
@@ -60,7 +65,10 @@ app.post("/sts", async (req, res) => {
   } catch (error) {
     openAImessages = defaultResponse;
   }
-  openAImessages = await lipSync({ messages: openAImessages.messages });
+  openAImessages = await lipSync({
+    messages: openAImessages.messages,
+    personality: personality,
+  });
   res.send({ messages: openAImessages });
 });
 
