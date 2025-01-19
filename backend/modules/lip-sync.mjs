@@ -10,7 +10,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const lipSync = async ({ messages, personality }) => {
   await Promise.all(
     messages.map(async (message, index) => {
-      const fileName = `audios/message_${index}.mp3`;
+      const fileName = `audios/message_${personality}_${index}.mp3`;
 
       for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
         try {
@@ -39,13 +39,13 @@ const lipSync = async ({ messages, personality }) => {
 
   await Promise.all(
     messages.map(async (message, index) => {
-      const fileName = `audios/message_${index}.mp3`;
+      const fileName = `audios/message_${personality}_${index}.mp3`;
 
       try {
-        await getPhonemes({ message: index });
+        await getPhonemes({ message: `${personality}_${index}` });
         message.audio = await audioFileToBase64({ fileName });
         message.lipsync = await readJsonTranscript({
-          fileName: `audios/message_${index}.json`,
+          fileName: `audios/message_${personality}_${index}.json`,
         });
       } catch (error) {
         console.error(
